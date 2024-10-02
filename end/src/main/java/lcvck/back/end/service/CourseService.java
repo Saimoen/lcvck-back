@@ -24,8 +24,8 @@ public class CourseService {
         ));
 
         // Créez les objets Course et ajoutez les classements
-        Course course1 = new Course("Scratch Course 1 (14 km)", classementScratchCourse1);
-        Course course2 = new Course("Junior 16 (14 km)", classementJunior16);
+        Course course1 = new Course("2024-06-13", "Scratch Course 1 (14 km)", classementScratchCourse1);
+        Course course2 = new Course("2024-02-21","Junior 16 (14 km)", classementJunior16);
 
         // Retournez la liste des courses
         return Arrays.asList(course1, course2);

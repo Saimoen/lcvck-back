@@ -16,6 +16,7 @@ public class Club {
         private Double longitude;
         private String lien;
         private String province;
+        private String type;
 
         // Getters et Setters
         public Long getId() {
@@ -97,4 +98,12 @@ public class Club {
         public void setProvince(String province) {
             this.province = province;
         }
+
+    public String getType() {
+        return type;
     }
+
+    public void setType(String type) {
+        this.type = type;
+    }
+}
