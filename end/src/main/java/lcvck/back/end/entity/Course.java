@@ -1,19 +1,33 @@
 package lcvck.back.end.entity;
+import jakarta.persistence.*;
 
 import java.util.List;
 
+@Entity
 public class Course {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
     private String date;
     private String course;
-    private List<Classement> classement;
+
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)  // Utilise OneToMany
+    @JoinColumn(name = "classement_id")  // Change le nom de la colonne
+    private List<Classement> classements;  // Change pour List<Classement>
+
 
     // Constructeurs, getters et setters
 
 
-    public Course(String date, String course, List<Classement> classement) {
+    public Course(String date, String course, List<Classement> classements) {
         this.date = date;
         this.course = course;
-        this.classement = classement;
+        this.classements = classements;
+    }
+
+    public Course() {}
+
+    public Course(Course course, Classement classements) {
     }
 
     public String getDate() {
@@ -32,11 +46,19 @@ public class Course {
         this.course = course;
     }
 
-    public List<Classement> getClassement() {
-        return classement;
+    public Long getId() {
+        return id;
     }
 
-    public void setClassement(List<Classement> classement) {
-        this.classement = classement;
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public List<Classement> getClassements() {
+        return classements;
+    }
+
+    public void setClassements(List<Classement> classements) {
+        this.classements = classements;
     }
 }

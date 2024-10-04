@@ -1,12 +1,12 @@
 package lcvck.back.end.controller;
 
+import lcvck.back.end.entity.Classement;
 import lcvck.back.end.entity.Course;
 import lcvck.back.end.service.CourseService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -16,6 +16,12 @@ import java.util.List;
 public class CourseController {
     @Autowired private CourseService courseService;
 
-    @GetMapping
+    @GetMapping("/get")
     public List<Course> getAllResultat() { return courseService.getCoursesWithClassements(); };
+
+    @PostMapping("/create")
+    public ResponseEntity<Course> createCourse(@RequestBody Course course) {
+        Course savedCourse = courseService.addCourse(course);
+        return ResponseEntity.status(HttpStatus.CREATED).body(savedCourse);
+    }
 }

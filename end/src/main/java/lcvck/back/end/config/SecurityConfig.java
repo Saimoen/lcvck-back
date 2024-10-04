@@ -24,8 +24,8 @@ public class SecurityConfig {
                 .addFilterBefore(new JwtAuthFilter(userAuthProvider), BasicAuthenticationFilter.class)
                 .sessionManagement(customizer -> customizer.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests((requests) -> requests
-                        .requestMatchers(HttpMethod.POST, "/login", "/api/v1/clubs", "/api/v1/resultats").permitAll() // Allow POST
-                        .requestMatchers(HttpMethod.GET, "/api/v1/clubs", "/api/v1/resultats").permitAll() // Allow GET
+                        .requestMatchers(HttpMethod.POST, "/login", "/api/v1/clubs", "/api/v1/resultats/create").permitAll() // Allow POST
+                        .requestMatchers(HttpMethod.GET, "/api/v1/clubs/", "/api/v1/resultats/get").permitAll() // Allow GET
                         .anyRequest().authenticated()
                 );
         return http.build();

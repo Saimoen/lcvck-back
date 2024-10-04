@@ -1,16 +1,30 @@
 package lcvck.back.end.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import jakarta.persistence.*;
+
 import java.util.List;
 
+@Entity
 public class Classement {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
     private int position;
     private String dossard;
     private int num;
     private String equipage;
     private String categorie;
+
+
+    @ElementCollection
     private List<String> noms;
     private String temps;
     private String ecart;
+
+    @ManyToOne  // Change la relation à ManyToOne
+    @JsonIgnore  // Ignore cette relation lors de la sérialisation pour éviter les boucles infinies
+    private Course course;
 
     public Classement(int position, String dossard, int num, String equipage, String categorie, List<String> noms, String temps, String ecart) {
         this.position = position;
@@ -22,6 +36,8 @@ public class Classement {
         this.temps = temps;
         this.ecart = ecart;
     }
+
+    public Classement() {}
 
     public int getPosition() {
         return position;
@@ -85,5 +101,21 @@ public class Classement {
 
     public void setEcart(String ecart) {
         this.ecart = ecart;
+    }
+
+    public Course getCourse() {
+        return course;
+    }
+
+    public void setCourse(Course course) {
+        this.course = course;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 }
