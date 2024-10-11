@@ -1,0 +1,58 @@
+LCVCK : notes
+
+authentification => Courses/Club? (image) => création/modification/suppression
+
+// Authentification
+
+{
+    "login": "LCVCK",
+    "password": "LCVCK"
+}
+
+// Course
+
+{
+    "date": "2025-05-12",
+    "course": "Scratch Course 1 (69 km)",
+    "classements": [
+        {
+            "position": 1,
+            "dossard": "8B",
+            "num": 8,
+            "equipage": "MD SHELL",
+            "categorie": "M50 H",
+            "noms": [
+                "PAROTU Laurent",
+                "CLOBER Moïse"
+            ],
+            "temps": "01:16:31",
+            "ecart": ""
+        },
+        {
+            "position": 2,
+            "dossard": "19B",
+            "num": 9,
+            "equipage": "MD SHELL",
+            "categorie": "M50 H",
+            "noms": [
+                "PARANQUE Régis",
+                "LE POUL Philippe"
+            ],
+            "temps": "01:20:10",
+            "ecart": "00:03:39"
+        }
+    ]
+}
+
+Cynthia MAINGUET - Mael LEGRAS - Rosemelle TERII
+
+dans la table classement, classement_id => ligne dans tableau de course
+
+
+glossaire (mot technique définition simple)
+DINUM => projet informatique du gouvernement
+Reformuler la présentation de l'entreprise
+DTSI remplacer par DINUM
+Me situer dans l'équipe de la DTSI 
+
+comment le développement et l'amélioration d'une application interne peut-elle améliorer des procédés au sein de la DSF ?
