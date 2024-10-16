@@ -16,9 +16,7 @@ public class Classement {
     private String equipage;
     private String categorie;
 
-
-    @ElementCollection
-    private List<String> noms;
+    private String nom;
     private String temps;
     private String ecart;
 
@@ -26,13 +24,13 @@ public class Classement {
     @JsonIgnore  // Ignore cette relation lors de la sérialisation pour éviter les boucles infinies
     private Course course;
 
-    public Classement(int position, String dossard, int num, String equipage, String categorie, List<String> noms, String temps, String ecart) {
+    public Classement(int position, String dossard, int num, String equipage, String categorie, String nom, String temps, String ecart) {
         this.position = position;
         this.dossard = dossard;
         this.num = num;
         this.equipage = equipage;
         this.categorie = categorie;
-        this.noms = noms;
+        this.nom = nom;
         this.temps = temps;
         this.ecart = ecart;
     }
@@ -79,12 +77,12 @@ public class Classement {
         this.categorie = categorie;
     }
 
-    public List<String> getNoms() {
-        return noms;
+    public String getNom() {
+        return nom;
     }
 
-    public void setNoms(List<String> noms) {
-        this.noms = noms;
+    public void setNoms(String nom) {
+        this.nom = nom;
     }
 
     public String getTemps() {
