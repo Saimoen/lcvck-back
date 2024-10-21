@@ -1,4 +1,4 @@
 package lcvck.back.end.dto;
 
-public record ErrorDto (String message) {
+public record ErrorDto() {
 }
