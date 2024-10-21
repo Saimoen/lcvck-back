@@ -10,6 +10,7 @@ public class Classement {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     private int position;
     private String dossard;
     private int num;
