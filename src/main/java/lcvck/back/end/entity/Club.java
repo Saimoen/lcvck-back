@@ -6,7 +6,6 @@ public class Club {
         @Id
         @GeneratedValue(strategy = GenerationType.IDENTITY)
         private Long id;
-
         private String image;
         private String mail;
         private String telephone;
