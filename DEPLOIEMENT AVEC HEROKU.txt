@@ -19,4 +19,4 @@ REMPLIR LA BASE DE DONNEE
 
 Exporter la base de données en un seul fichier
 Importer le fichier .sql dans la base de données :
-heroku pg:psql -a [nom_de_votre_application]
+heroku pg:psql --app lcvck-back -f lcvck.sql
