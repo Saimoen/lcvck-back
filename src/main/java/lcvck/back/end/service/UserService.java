@@ -22,11 +22,12 @@ public class UserService {
 
     public UserDto login(CredentialsDto credentialsDto) {
         User user = userRepository.findByLogin(credentialsDto.login())
-                .orElseThrow();
-        if(passwordEncoder.matches(CharBuffer.wrap(credentialsDto.password()), user.getPassword())) {
+                .orElseThrow(() -> new AppException("User not found", HttpStatus.NOT_FOUND));
+
+        if (passwordEncoder.matches(CharBuffer.wrap(credentialsDto.password()), user.getPassword())) {
             return userMapper.toUserDto(user);
         }
-        throw new AppException("invalid password", HttpStatus.BAD_REQUEST);
-
+        throw new AppException("Invalid password", HttpStatus.BAD_REQUEST);
     }
+
 }
