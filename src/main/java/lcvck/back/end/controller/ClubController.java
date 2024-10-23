@@ -12,6 +12,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/v1/clubs")
+@CrossOrigin(origins = "https://lcvck-front-92c29473ebbf.herokuapp.com")
 public class ClubController {
 
     @Autowired
