@@ -3,11 +3,14 @@ package lcvck.back.end.config;
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.JWTVerifier;
 import com.auth0.jwt.algorithms.Algorithm;
+import com.auth0.jwt.exceptions.JWTVerificationException;
 import com.auth0.jwt.interfaces.DecodedJWT;
 import jakarta.annotation.PostConstruct;
 import lcvck.back.end.dto.UserDto;
+import lcvck.back.end.exceptions.AppException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.HttpStatus;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Component;
@@ -42,17 +45,22 @@ public class UserAuthProvider {
     }
 
     public Authentication validateToken(String token) {
-        Algorithm algorithm = Algorithm.HMAC256(secretKey);
+        try {
+            Algorithm algorithm = Algorithm.HMAC256(secretKey);
+            JWTVerifier verifier = JWT.require(algorithm).build();
+            DecodedJWT decoded = verifier.verify(token);
 
-        JWTVerifier verifier = JWT.require(algorithm).build();
+            UserDto user = UserDto.builder()
+                    .login(decoded.getIssuer())
+                    .firstName(decoded.getClaim("firstName").asString())
+                    .lastName(decoded.getClaim("lastName").asString())
+                    .build();
 
-        DecodedJWT decoded = verifier.verify(token);
-
-        UserDto user = UserDto.builder()
-                .login(decoded.getIssuer())
-                .firstName(decoded.getClaim("firstName").asString())
-                .lastName(decoded.getClaim("lastName").asString())
-                .build();
-        return new UsernamePasswordAuthenticationToken(user, null, Collections.emptyList());
+            return new UsernamePasswordAuthenticationToken(user, null, Collections.emptyList());
+        } catch (JWTVerificationException e) {
+            // Log the error and return null or throw an appropriate exception
+            throw new AppException("Invalid or expired JWT token", HttpStatus.UNAUTHORIZED);
+        }
     }
+
 }
