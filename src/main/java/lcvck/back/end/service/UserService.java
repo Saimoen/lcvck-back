@@ -27,6 +27,5 @@ public class UserService {
             return userMapper.toUserDto(user);
         }
         throw new AppException("invalid password", HttpStatus.BAD_REQUEST);
-
     }
 }
