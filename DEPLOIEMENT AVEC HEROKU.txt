@@ -1,0 +1,22 @@
+DEPLOIEMENT AVEC HEROKU
+
+MISE EN PLACE DU SERVEUR
+
+Créer un dépôt HEROKU :
+heroku create
+
+Renommer un dépot HEROKU :
+heroku apps:rename --app ${NOM_PAR_DEFAUT} ${NOM_SOUHAITE}
+
+Ajouter un remote sur le git du dépot HEROKU :
+git remote add heroku ${GIT_REPOSITORY}
+
+Commiter et push sur le nouvel remote :
+git commit -m "Prepare app to deploy"
+git push heroku main
+
+REMPLIR LA BASE DE DONNEE
+
+Exporter la base de données en un seul fichier
+Importer le fichier .sql dans la base de données :
+heroku pg:psql -a [nom_de_votre_application]
