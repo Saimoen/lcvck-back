@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class ClubService {
@@ -13,5 +14,13 @@ public class ClubService {
 
     public List<Club> getAllClubs() {
         return clubRepository.findAll();
+    }
+
+    public Club save(Club club) {
+        return clubRepository.save(club);
+    }
+
+    public Optional<Club> findById(Long id) {
+        return clubRepository.findById(id);
     }
 }

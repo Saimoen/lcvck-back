@@ -24,9 +24,9 @@ public class WebConfig {
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         CorsConfiguration config = new CorsConfiguration();
         config.setAllowCredentials(true);
-        config.addAllowedOrigin("https://lcvck-front-92c29473ebbf.herokuapp.com/");
+      //  config.addAllowedOrigin("https://lcvck-front-92c29473ebbf.herokuapp.com/");
         // local environment
-        // config.addAllowedOrigin("http://localhost:4200/");
+        config.addAllowedOrigin("http://localhost:4200/");
         config.setAllowedHeaders(Arrays.asList(
                 HttpHeaders.AUTHORIZATION,
                 HttpHeaders.CONTENT_TYPE,

@@ -6,7 +6,8 @@ public class Club {
         @Id
         @GeneratedValue(strategy = GenerationType.IDENTITY)
         private Long id;
-        private String image;
+    @Lob // Ajoute cette annotation pour indiquer qu'il s'agit d'un BLOB
+    private byte[] image; // Remplace le String par un tableau de bytes
         private String mail;
         private String telephone;
         private String titre;
@@ -26,15 +27,15 @@ public class Club {
             this.id = id;
         }
 
-        public String getImage() {
-            return image;
-        }
+    public byte[] getImage() {
+        return image;
+    }
 
-        public void setImage(String image) {
-            this.image = image;
-        }
+    public void setImage(byte[] image) {
+        this.image = image;
+    }
 
-        public String getMail() {
+    public String getMail() {
             return mail;
         }
 
