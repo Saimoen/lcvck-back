@@ -23,4 +23,8 @@ public class ClubService {
     public Optional<Club> findById(Long id) {
         return clubRepository.findById(id);
     }
+
+    public void delete(Long id) {
+        clubRepository.deleteById(id);
+    }
 }
