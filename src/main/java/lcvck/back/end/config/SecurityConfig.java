@@ -25,7 +25,7 @@ public class SecurityConfig {
                 .sessionManagement(customizer -> customizer.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests((requests) -> requests
                         .requestMatchers(HttpMethod.POST, "/login", "/api/v1/clubs", "/api/v1/resultats/create", "/api/v1/clubs/upload").permitAll() // Allow POST
-                        .requestMatchers(HttpMethod.GET, "/api/v1/clubs/get", "/api/v1/clubs/get/{id}", "/api/v1/resultats/get", "/api/v1/resultats/get/{id}", "/api/v1/clubs/image/{id}").permitAll() // Allow GET
+                        .requestMatchers(HttpMethod.GET, "/api/v1/clubs", "/api/v1/clubs/get/{id}", "/api/v1/resultats/get", "/api/v1/resultats/get/{id}", "/api/v1/clubs/image/{id}").permitAll() // Allow GET
                         .requestMatchers(HttpMethod.PUT, "/api/v1/clubs", "/api/v1/resultats/update/{id}", "/api/v1/clubs/update/{id}").permitAll() // Allow PUT
                         .requestMatchers(HttpMethod.DELETE, "/api/v1/resultats/delete/{id}", "/api/v1/clubs/delete/{id}").permitAll() // Allow DELETE
                         .anyRequest().authenticated()
