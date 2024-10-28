@@ -25,7 +25,7 @@ public class ClubController {
     @Autowired
     private ClubService clubService;
 
-    @GetMapping
+    @GetMapping("/get")
     public List<Club> getAllClubs() {
         return clubService.getAllClubs();
     }
