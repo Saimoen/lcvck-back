@@ -19,7 +19,7 @@ import org.springframework.http.MediaType;
 @RestController
 @RequestMapping("/api/v1/clubs")
 @CrossOrigin(origins = "https://lcvck-front-92c29473ebbf.herokuapp.com")
-// @CrossOrigin(origins = "http://localhost:8080/")
+// @CrossOrigin(origins = "http://localhost:8080/"
 public class ClubController {
 
     @Autowired
