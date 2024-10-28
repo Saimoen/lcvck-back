@@ -10,6 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.util.List;
 import java.util.Optional;
 
@@ -17,8 +18,8 @@ import org.springframework.http.MediaType;
 
 @RestController
 @RequestMapping("/api/v1/clubs")
-// @CrossOrigin(origins = "https://lcvck-front-92c29473ebbf.herokuapp.com")
-@CrossOrigin(origins = "http://localhost:8080/")
+@CrossOrigin(origins = "https://lcvck-front-92c29473ebbf.herokuapp.com")
+// @CrossOrigin(origins = "http://localhost:8080/")
 public class ClubController {
 
     @Autowired
@@ -67,29 +68,38 @@ public class ClubController {
     }
 
     @PutMapping("/update/{id}")
-    public ResponseEntity<Club> updateCourse(@PathVariable Long id, @RequestBody Club club) {
-        // Logic pour trouver la course existante par son ID et mettre à jour ses informations
-        Optional<Club> existingClub = clubService.findById(id);
+    public ResponseEntity<Club> updateClub(
+            @PathVariable Long id,
+            @RequestParam(value = "image", required = false) MultipartFile file, // Pour le fichier image
+            @ModelAttribute ClubDTO clubDTO) throws IOException { // Utilisez un DTO pour les autres données
+        Optional<Club> existingClubOpt = clubService.findById(id);
 
-        if (!existingClub.isPresent()) {
-            return ResponseEntity.notFound().build(); // Renvoie 404 si la course n'existe pas
+        if (!existingClubOpt.isPresent()) {
+            return ResponseEntity.notFound().build(); // Renvoie 404 si le club n'existe pas
         }
 
-        Club updatedClub = existingClub.get();
-        updatedClub.setMail(club.getMail());
-        updatedClub.setTelephone(club.getTelephone());
-        updatedClub.setTitre(club.getTitre());
-        updatedClub.setAdresse(club.getAdresse());
-        updatedClub.setLatitude(club.getLatitude());
-        updatedClub.setLongitude(club.getLongitude());
-        updatedClub.setLien(club.getLien());
-        updatedClub.setProvince(club.getProvince());
-        updatedClub.setType(club.getType());
-        updatedClub.setImage(updatedClub.getImage());
+        Club updatedClub = existingClubOpt.get();
+
+        // Mettez à jour les champs du club
+        updatedClub.setMail(clubDTO.getMail());
+        updatedClub.setTelephone(clubDTO.getTelephone());
+        updatedClub.setTitre(clubDTO.getTitre());
+        updatedClub.setAdresse(clubDTO.getAdresse());
+        updatedClub.setLatitude(clubDTO.getLatitude());
+        updatedClub.setLongitude(clubDTO.getLongitude());
+        updatedClub.setLien(clubDTO.getLien());
+        updatedClub.setProvince(clubDTO.getProvince());
+        updatedClub.setType(clubDTO.getType());
+
+        // Si un fichier est envoyé, mettez à jour l'image
+        if (file != null && !file.isEmpty()) {
+            updatedClub.setImage(file.getBytes());
+        }
 
         clubService.save(updatedClub);
         return ResponseEntity.ok(updatedClub);
     }
+
 
     // Suppress club
     @DeleteMapping("/delete/{id}")
